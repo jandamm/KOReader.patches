@@ -15,7 +15,9 @@ Author: Andreas Lösel
 License: GNU AGPL v3
 --]]
 
--- Modified by me. From: https://github.com/loeffner/KOReader.patches/blob/main/project-title/2-pt-modify-progressbar-max-width.lua
+-- Modified by me to fit the Kobo Claras screen size.
+-- Should be working fine with 5-6 items per page.
+-- Source: https://github.com/loeffner/KOReader.patches/blob/main/project-title/2-pt-modify-progressbar-max-width.lua
 
 local userpatch = require("userpatch")
 
@@ -23,9 +25,9 @@ local function patchCoverBrowser(plugin)
     local ptutil = require("ptutil")
 
     -- This value will make the progress bar "physically" longer. If there is not enough space it will squish the elements on the left.
-    ptutil.list_defaults.progress_bar_max_size = 250
+    ptutil.list_defaults.progress_bar_max_size = 430
     -- This value squeezes more pages into the same space, making the bar reflect larger books without increasing the physical size.
-    ptutil.list_defaults.progress_bar_pages_per_pixel = 4
+    ptutil.list_defaults.progress_bar_pages_per_pixel = 3
 end
 
 userpatch.registerPatchPluginFunc("coverbrowser", patchCoverBrowser)
