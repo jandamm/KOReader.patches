@@ -12,6 +12,13 @@ It also disables creating settings for files which aren't in `/mnt/onboard/.kore
 
 The code was mostly copied from [here](https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114)
 
+## [2-pt-progressbar-1000-pages](2-pt-progressbar-1000-pages.lua)
+
+Increases the Project Title progress bar to show 1000 pages instead of 705.
+It does so by making the bar longer and packing more pages into one pixel.
+
+This is just a modified version of [this user patch](https://github.com/loeffner/KOReader.patches/blob/main/project-title/2-pt-modify-progressbar-max-width.lua) configured for my use-case.
+
 ## [2-reading-stats-book-total-percent](2-reading-stats-book-total-percent.lua)
 
 Shows the full percentage up to which point the book was read in Reading Stats > {Book} > Days reading this book.
