@@ -33,15 +33,20 @@ userpatch.registerPatchPluginFunc("statistics", function(ReaderStatistics)
         local db_location = DataStorage:getSettingsDir() .. "/statistics.sqlite3"
         local conn = SQ3.open(db_location)
         local sql_stmt = [[
-            SELECT date(start_time, 'unixepoch', 'localtime') AS dates,
-                   count(DISTINCT page)                       AS pages,
-                   sum(duration)                              AS durations,
-                   min(start_time)                            AS min_start_time,
-                   max(start_time)                            AS max_start_time,
-                   max((page * 1.0) / total_pages)            AS total_percentage
-            FROM   page_stat_data
-            WHERE  id_book = %d
-            GROUP  BY Date(start_time, 'unixepoch', 'localtime')
+            SELECT date(ps.start_time, 'unixepoch', 'localtime') AS dates,
+                   count(DISTINCT ps.page)                       AS pages,
+                   sum(ps.duration)                              AS durations,
+                   min(ps.start_time)                            AS min_start_time,
+                   max(ps.start_time)                            AS max_start_time,
+                   (SELECT (page * 1.0 / total_pages)
+                    FROM page_stat_data ps2
+                    WHERE ps2.id_book = ps.id_book
+                      AND date(ps2.start_time, 'unixepoch', 'localtime') = date(ps.start_time, 'unixepoch', 'localtime')
+                    ORDER BY ps2.start_time DESC
+                    LIMIT 1)                                     AS total_percentage
+            FROM   page_stat_data ps
+            WHERE  ps.id_book = %d
+            GROUP  BY date(ps.start_time, 'unixepoch', 'localtime')
             ORDER  BY dates DESC;
         ]]
 
