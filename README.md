@@ -19,6 +19,13 @@ It does so by making the bar longer and packing more pages into one pixel.
 
 This is just a modified version of [this user patch](https://github.com/loeffner/KOReader.patches/blob/main/project-title/2-pt-modify-progressbar-max-width.lua) configured for my use-case.
 
+## [2-pt-state-percentage](2-pt-state-percentage.lua)
+
+Shows the read percentage next to the reading state.
+Only when the book is currently being read or paused.
+
+![](resources/pt-state-percentage.png)
+
 ## [2-reading-stats-book-total-percent](2-reading-stats-book-total-percent.lua)
 
 Shows the full percentage up to which point the book was read in Reading Stats > {Book} > Days reading this book.
