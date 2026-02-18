@@ -12,6 +12,19 @@ It also disables creating settings for files which aren't in `/mnt/onboard/.kore
 
 The code was mostly copied from [here](https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114)
 
+## [2-pt-modify-cached-cover-size](2-pt-modify-cached-cover-size.lua)
+
+This patch allows you to modify the size of covers cached by Project Title.  
+You can decrease the size to save disk space or increase it when using with other plugins or patches which are displaying the images large.
+
+By default this patch changes the size to 750 (from 600). 750 worked fine on my device.  
+You can modify `max_cover_dimension` if you prefer another size.
+
+**Warning: Setting the size too big produces performance issues in Project Title.**
+Make sure to disable this patch and recreate all metadata before creating an issue for Project Title.
+
+This requires Project Title v3.7+
+
 ## [2-pt-progressbar-and-percentage](2-pt-progressbar-and-percentage.lua)
 
 Shows the read percentage as well as the progress bar.
@@ -21,6 +34,8 @@ You can configure it to show the percentage in a new line by setting `show_with_
 You can enable set `percentage_decimal_places` to show a more precise percentage. (This is only applied with enabled progress bar)
 
 ![](resources/pt-state-percentage.png)
+
+This requires Project Title v3.7+
 
 ## [2-pt-progressbar-koboclara-full](2-pt-progressbar-koboclara-full.lua)
 
