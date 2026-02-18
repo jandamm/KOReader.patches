@@ -17,7 +17,8 @@ The code was mostly copied from [here](https://github.com/koreader/koreader/issu
 Shows the read percentage as well as the progress bar.
 Only when the book is currently being read or paused.
 
-You can configure it to show the percentage in a new line by setting `show_with_state = false`.
+You can configure it to show the percentage in a new line by setting `show_with_state = false`.  
+You can enable set `percentage_decimal_places` to show a more precise percentage. (This is only applied with enabled progress bar)
 
 ![](resources/pt-state-percentage.png)
 
