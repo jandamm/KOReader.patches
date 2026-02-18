@@ -12,13 +12,6 @@ It also disables creating settings for files which aren't in `/mnt/onboard/.kore
 
 The code was mostly copied from [here](https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114)
 
-## [2-pt-progressbar-koboclara-full](2-pt-progressbar-koboclara-full.lua)
-
-Increases the Project Title progress bar to fill the whole available space on a Kobo Clara.
-Use it with 5 items per page. (6 items is also fine but won't fill the whole screen.)
-
-This is just a modified version of [this user patch](https://github.com/loeffner/KOReader.patches/blob/main/project-title/2-pt-modify-progressbar-max-width.lua) configured for my use-case.
-
 ## [2-pt-progressbar-and-percentage](2-pt-progressbar-and-percentage.lua)
 
 Shows the read percentage as well as the progress bar.
@@ -27,6 +20,18 @@ Only when the book is currently being read or paused.
 You can configure it to show the percentage in a new line by setting `show_with_state = false`.
 
 ![](resources/pt-state-percentage.png)
+
+## [2-pt-progressbar-koboclara-full](2-pt-progressbar-koboclara-full.lua)
+
+Increases the Project Title progress bar to fill the whole available space on a Kobo Clara.
+Use it with 5 items per page. (6 items is also fine but won't fill the whole screen.)
+
+This is just a modified version of [this user patch](https://github.com/loeffner/KOReader.patches/blob/main/project-title/2-pt-modify-progressbar-max-width.lua) configured for my use-case.
+
+## [2-pt-titlebar-collections](2-pt-titlebar-collections.lua)
+
+Replaces the "Open last document" titlebar item with a shortcut to collections.  
+On hold it will still open the last document.
 
 ## [2-reading-stats-book-total-percent](2-reading-stats-book-total-percent.lua)
 
