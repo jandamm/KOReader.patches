@@ -1,6 +1,18 @@
 # KOReader.patches
 Patches for KOReader
 
+## [2-compact-classic-time](2-compact-classic-time.lua)
+
+By default the time in classic format is `hh:mm(:ss)` no matter if `compact` is set or not.  
+This patch will use `h:mm(:ss)` instead when `compact` is used.
+
+You can also set `always_compact = true` this will always omit the leading hour (when `0`).  
+Just be sure that some lists might look off when using `always_compact`. The lines might not be aligned correctly anymore:
+```
+13:37 Test  -> 13:37 Test
+01:37 Test  -> 1:37 Test
+```
+
 ## [2-ignore-non-books-stats](2-ignore-non-books-stats.lua)
 
 Ignores all books not being in `/mnt/onboard/.koreader/Books`.
