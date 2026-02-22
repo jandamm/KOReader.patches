@@ -68,3 +68,16 @@ Shows the full percentage up to which point the book was read in Reading Stats >
 E.g.: `2026-02-16   00:13:37 (42 pages) -> 13,37%`
 
 I used [this patch](https://github.com/omer-faruq/koreader-user-patches/blob/main/2-reading-stats-current-book-days-percent.lua) as a starter.
+
+## [2-reading-stats-book-improved](2-reading-stats-book-improved.lua)
+
+Shows the pages read, time per page and full percentage up to which point the book was read in Reading Stats > {Book} > Days reading this book.
+
+E.g.:
+```
+date       duration  pages    speed     total read
+             h:mm           min/page
+2026-02-16   0:13    (42)    Ø 1:10    -> 13,37%`
+```
+
+I used [this patch](https://github.com/omer-faruq/koreader-user-patches/blob/main/2-reading-stats-current-book-days-percent.lua) as a starter.
