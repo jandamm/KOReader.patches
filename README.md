@@ -13,6 +13,15 @@ Just be sure that some lists might look off when using `always_compact`. The lin
 01:37 Test  -> 1:37 Test
 ```
 
+## [2-duration-format-short](2-duration-format-short.lua)
+
+Formats all durations as following
+```
+1:12 -> 1 minute 12 seconds
+1:12h -> 1 hour 12 minutes
+```
+Optionally you can set `show_minutes_unit = true` to show `1:12m` for minutes.
+
 ## [2-ignore-non-books-stats](2-ignore-non-books-stats.lua)
 
 Ignores all books not being in `/mnt/onboard/.koreader/Books`.
