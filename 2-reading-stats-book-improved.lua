@@ -23,7 +23,7 @@ local function formatDayValue(duration, day_pages, total_percent)
         "%s  %s  Ø %s  → %s%%",
         datetime.secondsToClockDuration("classic", duration, true):gsub("^0(%d:)", "%1"), -- h:mm
         padLeft(tostring(day_pages), 3, "(", ")"),
-        datetime.secondsToClockDuration("classic", duration / day_pages):gsub("^00:", ""):gsub("^0(%d:)", "%1"), -- m:ss
+        datetime.secondsToClockDuration("classic", duration / day_pages):gsub("^00?:", ""):gsub("^0(%d:)", "%1"), -- m:ss
         padLeft(perc, 5)
     )
 end
