@@ -19,11 +19,15 @@ end
 
 local function formatDayValue(duration, day_pages, total_percent)
     local perc = string.format("%.2f", total_percent * 100)
+    local mpp = datetime.secondsToClockDuration("classic", duration / day_pages)
+    if #mpp == 8 then
+        mpp = mpp:gsub("^00?:", "") -- hh:mm:ss -> mm:ss
+    end
     return string.format(
         "%s  %s  Ø %s  → %s%%",
         datetime.secondsToClockDuration("classic", duration, true):gsub("^0(%d:)", "%1"), -- h:mm
         padLeft(tostring(day_pages), 3, "(", ")"),
-        datetime.secondsToClockDuration("classic", duration / day_pages):gsub("^00?:", ""):gsub("^0(%d:)", "%1"), -- m:ss
+        mpp:gsub("^0(%d:)", "%1"),
         padLeft(perc, 5)
     )
 end
