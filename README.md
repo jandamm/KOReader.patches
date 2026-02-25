@@ -13,6 +13,12 @@ Just be sure that some lists might look off when using `always_compact`. The lin
 01:37 Test  -> 1:37 Test
 ```
 
+## [2-confirm-first-open-in-books](2-confirm-first-open-in-books.lua)
+
+Shows a dialog when a book in `HOME/.koreader/Books` is opened for the first time.
+
+Derived from [2-confirm-first-open.lua](https://github.com/medinauta/Koreader-Patches/blob/main/2-confirm-first-open.lua).
+
 ## [2-duration-format-short](2-duration-format-short.lua) and [2-duration-format-shortest](2-duration-format-shortest.lua)
 
 Those scripts will format all durations in the following pattern:
