@@ -13,14 +13,23 @@ Just be sure that some lists might look off when using `always_compact`. The lin
 01:37 Test  -> 1:37 Test
 ```
 
-## [2-duration-format-short](2-duration-format-short.lua)
+## [2-duration-format-short](2-duration-format-short.lua) and [2-duration-format-shortest](2-duration-format-shortest.lua)
 
-Formats all durations as following
+Those scripts will format all durations in the following pattern:
 ```
-1:12 -> 1 minute 12 seconds
-1:12h -> 1 hour 12 minutes
+66s  -> 1:06
+3606 -> 1:00h
 ```
-Optionally you can set `show_minutes_unit = true` to show `1:12m` for minutes.
+
+### The difference between **short** and **shortest**.
+The duration can be configured to hide seconds. They only differ when seconds should be hidden:
+
+```
+short:    66s -> 0:01h
+shortest: 66s -> 1:06
+```
+
+Optionally you can set `show_minutes_unit = true` to show `1:06m` for 66s.
 
 ## [2-ignore-non-books-stats](2-ignore-non-books-stats.lua)
 
