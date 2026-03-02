@@ -4,23 +4,22 @@ local DocumentRegistry = require("document/documentregistry")
 local ReadHistory = require("readhistory")
 local util = require("util")
 
-local user_path = "/mnt/onboard/.koreader/"
-
 -- https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114
 -- And following comments
 
 local function isInDataDir(path)
     return util.stringStartsWith(path, DataStorage:getDataDir())
 end
-local function isInBooks(path)
-    return util.stringStartsWith(path, user_path .. "Books/")
+local function isInHome(path)
+    local home = G_reader_settings:readSetting("home_dir"):match("(.*)/?") .. "/"
+    return util.stringStartsWith(path, home)
 end
 
 -- Ignore files for Reading Stats
 local orig_openDocument = DocumentRegistry.openDocument
 DocumentRegistry.openDocument = function(self, file, provider)
     local doc = orig_openDocument(self, file, provider)
-    if doc and not isInBooks(file) then
+    if doc and not isInHome(file) then
         doc.is_pic = true
     end
     return doc
@@ -38,8 +37,8 @@ end
 -- Ignore files for Book History
 local orig_addItem = ReadHistory.addItem
 function ReadHistory:addItem(file, ts, no_flush)
-    if file ~= nil and not isInBooks(file) then
+    if file ~= nil and not isInHome(file) then
         return
     end
-    orig_addItem(self, file, ts, no_flush)
+    return orig_addItem(self, file, ts, no_flush)
 end
