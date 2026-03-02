@@ -9,8 +9,6 @@ local DocSettings = require("docsettings")
 local logger = require("logger")
 local util = require("util")
 
-local unpack = unpack or table.unpack
-
 local user_path = "/mnt/onboard/.koreader/"
 
 if not FileManager._confirm_first_open_patched then

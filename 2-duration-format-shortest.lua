@@ -15,10 +15,9 @@ You can set show_minutes_unit to append "m" when the interval is < 1 hour.
 -- Show 0:03m for 3s instead of 0:03
 local show_minutes_unit = false
 
-
 local original = datetime.secondsToClockDuration
-function datetime.secondsToClockDuration(format, seconds, withoutSeconds, withDays, compact)
-    local value = original("classic", seconds, seconds >= 3600, withDays, false)
+function datetime.secondsToClockDuration(format, seconds, withoutSeconds, withDays, compact, ...)
+    local value = original("classic", seconds, seconds >= 3600, withDays, false, ...)
 
     if withDays and seconds >= 86400 then
         return value:gsub("^(%d+d)0(%d:)", "%1%2") -- remove leading hours 0

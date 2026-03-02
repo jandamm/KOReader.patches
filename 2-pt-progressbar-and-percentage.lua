@@ -8,16 +8,18 @@ local percentage_decimal_places = 0
 
 local userpatch = require("userpatch")
 
-local orig_progress = nil
+local patched = false
 local function patchCoverBrowser(plugin)
-    local ptutil = require("ptutil")
+    if patched then return end
+    patched = true
 
+    local ptutil = require("ptutil")
     if orig_progress == nil then
         orig_progress = ptutil.formatProgressText
     end
 
-    function ptutil.formatProgressText(status, bookinfo, pages, draw_progressbar, percent_finished, progress_strings)
-        local progress_str, percent_str, pages_str, pages_left_str = orig_progress(status, bookinfo, pages, draw_progressbar, percent_finished, progress_strings)
+    function ptutil.formatProgressText(status, bookinfo, pages, draw_progressbar, percent_finished, ...)
+        local progress_str, percent_str, pages_str, pages_left_str = orig_progress(status, bookinfo, pages, draw_progressbar, percent_finished, ...)
 
         if draw_progressbar and status ~= 'complete' and percent_finished then
             local factor = 10 ^ math.max(0, percentage_decimal_places or 0)

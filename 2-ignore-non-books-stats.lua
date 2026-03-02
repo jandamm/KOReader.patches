@@ -17,8 +17,8 @@ end
 
 -- Ignore files for Reading Stats
 local orig_openDocument = DocumentRegistry.openDocument
-DocumentRegistry.openDocument = function(self, file, provider)
-    local doc = orig_openDocument(self, file, provider)
+DocumentRegistry.openDocument = function(self, file, ...)
+    local doc = orig_openDocument(self, file, ...)
     if doc and not isInHome(file) then
         doc.is_pic = true
     end
@@ -27,18 +27,18 @@ end
 
 -- Prevent creating settings for files in data dir (koreader folder)
 local orig_flush = DocSettings.flush
-function DocSettings:flush(data)
+function DocSettings:flush(data, ...)
     if self and self.data and self.data.doc_path and isInDataDir(self.data.doc_path) then
         return
     end
-    return orig_flush(self, data)
+    return orig_flush(self, data, ...)
 end
 
 -- Ignore files for Book History
 local orig_addItem = ReadHistory.addItem
-function ReadHistory:addItem(file, ts, no_flush)
+function ReadHistory:addItem(file, ...)
     if file ~= nil and not isInHome(file) then
         return
     end
-    return orig_addItem(self, file, ts, no_flush)
+    return orig_addItem(self, file, ...)
 end
