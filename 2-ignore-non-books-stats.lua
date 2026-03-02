@@ -1,3 +1,4 @@
+local DataStorage = require("datastorage")
 local DocSettings = require("docsettings")
 local DocumentRegistry = require("document/documentregistry")
 local ReadHistory = require("readhistory")
@@ -8,8 +9,8 @@ local user_path = "/mnt/onboard/.koreader/"
 -- https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114
 -- And following comments
 
-local function isInHome(path)
-    return util.stringStartsWith(path, user_path)
+local function isInDataDir(path)
+    return util.stringStartsWith(path, DataStorage:getDataDir())
 end
 local function isInBooks(path)
     return util.stringStartsWith(path, user_path .. "Books/")
@@ -25,13 +26,13 @@ DocumentRegistry.openDocument = function(self, file, provider)
     return doc
 end
 
--- Prevent creating settings for files
+-- Prevent creating settings for files in data dir (koreader folder)
 local orig_flush = DocSettings.flush
 function DocSettings:flush(data)
-    if self and self.data and self.data.doc_path and not isInHome(self.data.doc_path) then
+    if self and self.data and self.data.doc_path and isInDataDir(self.data.doc_path) then
         return
     end
-    orig_flush(self, data)
+    return orig_flush(self, data)
 end
 
 -- Ignore files for Book History
