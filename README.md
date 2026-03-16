@@ -48,6 +48,14 @@ It also disables creating settings for files which aren't in `/mnt/onboard/.kore
 
 The code was mostly copied from [here](https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114)
 
+## [2-pt-light-dark-folder-icons](2-pt-light-dark-folder-icons.lua)
+
+Searches for separate folder icons in night and day mode.
+
+The images need to be named `.folder_light.png` and `.folder_dark.png`.  
+Alternatively `.folder.png` is used (if it exists).  
+Other names aren't supported (modify the pattern if needed)
+
 ## [2-pt-modify-cached-cover-size](2-pt-modify-cached-cover-size.lua)
 
 This patch allows you to modify the size of covers cached by Project Title.  

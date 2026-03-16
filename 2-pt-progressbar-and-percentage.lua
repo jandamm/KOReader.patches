@@ -14,9 +14,7 @@ local function patchCoverBrowser(plugin)
     patched = true
 
     local ptutil = require("ptutil")
-    if orig_progress == nil then
-        orig_progress = ptutil.formatProgressText
-    end
+    local orig_progress = ptutil.formatProgressText
 
     function ptutil.formatProgressText(status, bookinfo, pages, draw_progressbar, percent_finished, ...)
         local progress_str, percent_str, pages_str, pages_left_str = orig_progress(status, bookinfo, pages, draw_progressbar, percent_finished, ...)
