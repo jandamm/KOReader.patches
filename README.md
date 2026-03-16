@@ -48,13 +48,21 @@ It also disables creating settings for files which aren't in `/mnt/onboard/.kore
 
 The code was mostly copied from [here](https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114)
 
-## [2-pt-light-dark-folder-icons](2-pt-light-dark-folder-icons.lua)
+## [2-pt-light-dark-folder-icons](2-pt-light-dark-folder-icons.lua) and [2-pt-light-dark-folder-icons-dir](2-pt-light-dark-folder-icons-dir.lua)
 
 Searches for separate folder icons in night and day mode.
 
 The images need to be named `.folder_light.png` and `.folder_dark.png`.  
 Alternatively `.folder.png` is used (if it exists).  
 Other names aren't supported (modify the pattern if needed)
+
+### The difference between **default** and **dir**.
+
+**default** expects the folder images to be in the folder.
+
+**dir** expects the folder images to be in HOME/../.images/* where `*` is the path of the folder.  
+This allows to have the images separate from the books - which keeps them off automatic collections and other previews.
+Since the images are separated they aren't expected to be hidden. (`folder{,_dark,_light}.png`)
 
 ## [2-pt-modify-cached-cover-size](2-pt-modify-cached-cover-size.lua)
 
