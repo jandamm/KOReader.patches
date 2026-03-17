@@ -26,8 +26,11 @@ local function patchCoverBrowser(plugin)
         dir_path = dir_path:gsub("/+$", "")
         if not util.directoryExists(dir_path) then return nil end
 
+        local folder = dir_path:match("^" .. base .. "/(.*)$")
+        if not folder then return nil end
+
         local mode = G_reader_settings:readSetting("night_mode") and "_dark" or "_light"
-        local icon = images .. dir_path:match("^" .. base .. "/(.*)$") .. "/folder"
+        local icon = images .. folder .. "/folder"
         return fileIfExists(icon .. mode .. ext) or fileIfExists(icon .. ext)
     end
 end
