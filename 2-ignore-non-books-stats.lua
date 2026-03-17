@@ -2,6 +2,7 @@ local DataStorage = require("datastorage")
 local DocSettings = require("docsettings")
 local DocumentRegistry = require("document/documentregistry")
 local ReadHistory = require("readhistory")
+local userpatch = require("userpatch")
 local util = require("util")
 
 -- https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114
@@ -17,7 +18,7 @@ end
 
 -- Ignore files for Reading Stats
 local orig_openDocument = DocumentRegistry.openDocument
-DocumentRegistry.openDocument = function(self, file, ...)
+function DocumentRegistry:openDocument(file, ...)
     local doc = orig_openDocument(self, file, ...)
     if doc and not isInHome(file) then
         doc.is_pic = true
@@ -42,3 +43,20 @@ function ReadHistory:addItem(file, ...)
     end
     return orig_addItem(self, file, ...)
 end
+
+-- Ignore files for Reading Streak
+local patchedReadingStreak = false
+local function patchReadingStreak(ReadingStreak)
+    if patchedReadingStreak then return end
+    patchedReadingStreak = true
+
+    local orig_onPageUpdate = ReadingStreak.onPageUpdate
+    function ReadingStreak:onPageUpdate(...)
+        if self and self.document and self.document.is_pic then
+            return
+        end
+        orig_onPageUpdate(self, ...)
+    end
+end
+
+userpatch.registerPatchPluginFunc("readingstreak", patchReadingStreak)
