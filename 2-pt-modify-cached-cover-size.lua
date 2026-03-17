@@ -20,4 +20,3 @@ local function patchCoverBrowser(plugin)
 end
 
 userpatch.registerPatchPluginFunc("coverbrowser", patchCoverBrowser)
-

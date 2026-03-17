@@ -2,7 +2,7 @@
 
 -- if true it will show "Reading: 42%" instead of showing the percentage in a new line
 local show_with_state = true
-local percentage_decimal_places = 0
+local percentage_decimal_places = 1
 
 ---------------------------------
 
