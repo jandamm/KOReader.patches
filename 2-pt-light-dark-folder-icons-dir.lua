@@ -13,8 +13,8 @@ local function patchCoverBrowser(plugin)
     local util = require("util")
 
     local base = G_reader_settings:readSetting("home_dir"):match("(.*)/.*/?$") -- HOME/..
-    local images = base .. "/.images/" -- HOME/../.images/
-    local ext = ".png"
+    local folder_icons = base .. "/.folder_icons/" -- HOME/../.folder_icons/
+    local ext = ".jpg"
 
     local function fileIfExists(path)
         return util.fileExists(path) and path
@@ -32,7 +32,7 @@ local function patchCoverBrowser(plugin)
         if not folder then return nil end
 
         local mode = G_reader_settings:readSetting("night_mode") and "_dark" or "_light"
-        local icon = images .. folder .. "/folder"
+        local icon = folder_icons .. folder .. "/folder"
         return fileIfExists(icon .. mode .. ext) or fileIfExists(icon .. ext)
     end
 end
