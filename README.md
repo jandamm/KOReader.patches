@@ -1,6 +1,21 @@
 # KOReader.patches
 Patches for KOReader
 
+Patches where a folder structure is assumed (like `2-ignore-non-books-stats.lua`) they expect this structure:
+
+/some/path/base
+    /Archive
+    /Books  <- $home_dir
+    /...
+
+For a Kobo device this could be:
+/mnt/onboard
+    /.adds/koreader
+    /Books  <- $home_dir
+
+The idea behind this is that in `/base/Books` all books are stored (this folder can be named differently).  
+In `/base` there could be the `Archive`, `Instapaper` or other books you wouldn't want to track like you own books. Maybe knowledge books or books you read to a kid or spouse.
+
 ## [2-compact-classic-time](2-compact-classic-time.lua)
 
 By default the time in classic format is `hh:mm(:ss)` no matter if `compact` is set or not.  
@@ -47,6 +62,11 @@ It disables:
 It also disables creating settings for files which aren't in `/mnt/onboard/.koreader`.
 
 The code was mostly copied from [here](https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114)
+
+## [2-instapaper-folder](2-instapaper-folder.lua)
+
+This patch changes the folder where [instapaper.koplugin](https://github.com/omer-faruq/instapaper.koplugin) saves downloaded articles.
+The folder is `$home_dir/../Instapaper`.
 
 ## [2-pt-light-dark-folder-icons](2-pt-light-dark-folder-icons.lua) and [2-pt-light-dark-folder-icons-dir](2-pt-light-dark-folder-icons-dir.lua)
 
