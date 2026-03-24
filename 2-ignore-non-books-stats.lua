@@ -1,7 +1,4 @@
 local DataStorage = require("datastorage")
-local DocSettings = require("docsettings")
-local DocumentRegistry = require("document/documentregistry")
-local ReadHistory = require("readhistory")
 local util = require("util")
 
 -- https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114
@@ -16,6 +13,7 @@ local function isInHome(path)
 end
 
 -- Ignore files for Reading Stats
+local DocumentRegistry = require("document/documentregistry")
 local orig_openDocument = DocumentRegistry.openDocument
 function DocumentRegistry:openDocument(file, ...)
     local doc = orig_openDocument(self, file, ...)
@@ -26,6 +24,7 @@ function DocumentRegistry:openDocument(file, ...)
 end
 
 -- Prevent creating settings for files in data dir (koreader folder)
+local DocSettings = require("docsettings")
 local orig_flush = DocSettings.flush
 function DocSettings:flush(data, ...)
     if self and self.data and self.data.doc_path and isInDataDir(self.data.doc_path) then
@@ -35,6 +34,7 @@ function DocSettings:flush(data, ...)
 end
 
 -- Ignore files for Book History
+local ReadHistory = require("readhistory")
 local orig_addItem = ReadHistory.addItem
 function ReadHistory:addItem(file, ...)
     if file ~= nil and not isInHome(file) then

@@ -22,7 +22,8 @@ License: GNU AGPL v3
 local userpatch = require("userpatch")
 
 local function patchCoverBrowser(plugin)
-    local ptutil = require("ptutil")
+    local has_pt, ptutil = pcall(require, "ptutil")
+    if not has_pt then return end
 
     -- This value will make the progress bar "physically" longer. If there is not enough space it will squish the elements on the left.
     ptutil.list_defaults.progress_bar_max_size = 430

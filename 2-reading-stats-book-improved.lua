@@ -1,38 +1,34 @@
-local DataStorage = require("datastorage")
-local SQ3 = require("lua-ljsqlite3/init")
-local datetime = require("datetime")
-local ffiUtil = require("ffi/util")
-local _ = require("gettext")
-
-local N_ = _.ngettext
-local T = ffiUtil.template
-
 local userpatch = require("userpatch")
 
 -- Inspired by https://github.com/omer-faruq/koreader-user-patches/blob/main/2-reading-stats-current-book-days-percent.lua
 -- and https://github.com/koreader/koreader/blob/6d86891d9262026cc52be756a5b19b6e580fb33d/plugins/statistics.koplugin/main.lua#L2249
 
-local function padLeft(s, len, bef, aft)
-    local space = "\226\128\135" -- U+2007 Figure Space (UTF-8 Bytes)
-    return string.rep(space, len - #s) .. (bef or '') .. s .. (aft or '')
-end
-
-local function formatDayValue(duration, day_pages, total_percent)
-    local perc = string.format("%.2f", total_percent * 100)
-    local mpp = datetime.secondsToClockDuration("classic", duration / day_pages)
-    if #mpp == 8 then
-        mpp = mpp:gsub("^00?:", "") -- hh:mm:ss -> mm:ss
-    end
-    return string.format(
-        "%s  %s  Ø %s  → %s%%",
-        datetime.secondsToClockDuration("classic", duration, true):gsub("^0(%d:)", "%1"), -- h:mm
-        padLeft(tostring(day_pages), 3, "(", ")"),
-        mpp:gsub("^0(%d:)", "%1"),
-        padLeft(perc, 5)
-    )
-end
-
 userpatch.registerPatchPluginFunc("statistics", function(ReaderStatistics)
+    local DataStorage = require("datastorage")
+    local SQ3 = require("lua-ljsqlite3/init")
+    local datetime = require("datetime")
+    local _ = require("gettext")
+
+    local function padLeft(s, len, bef, aft)
+        local space = "\226\128\135" -- U+2007 Figure Space (UTF-8 Bytes)
+        return string.rep(space, len - #s) .. (bef or '') .. s .. (aft or '')
+    end
+
+    local function formatDayValue(duration, day_pages, total_percent)
+        local perc = string.format("%.2f", total_percent * 100)
+        local mpp = datetime.secondsToClockDuration("classic", duration / day_pages)
+        if #mpp == 8 then
+            mpp = mpp:gsub("^00?:", "") -- hh:mm:ss -> mm:ss
+        end
+        return string.format(
+            "%s  %s  Ø %s  → %s%%",
+            datetime.secondsToClockDuration("classic", duration, true):gsub("^0(%d:)", "%1"), -- h:mm
+            padLeft(tostring(day_pages), 3, "(", ")"),
+            mpp:gsub("^0(%d:)", "%1"),
+            padLeft(perc, 5)
+        )
+    end
+
     function ReaderStatistics:getDatesForBook(id_book)
         local results = {}
 

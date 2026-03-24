@@ -13,7 +13,8 @@ local function patchCoverBrowser(plugin)
     if patched then return end
     patched = true
 
-    local ptutil = require("ptutil")
+    local has_pt, ptutil = pcall(require, "ptutil")
+    if not has_pt then return end
     local orig_progress = ptutil.formatProgressText
 
     function ptutil.formatProgressText(status, bookinfo, pages, draw_progressbar, percent_finished, ...)

@@ -7,8 +7,10 @@ local function patchCoverBrowser(plugin)
     if patched then return end
     patched = true
 
+    local has_pt, ptutil = pcall(require, "ptutil")
+    if not has_pt then return end
+
     local util = require("util")
-    local ptutil = require("ptutil")
 
     local base = G_reader_settings:readSetting("home_dir"):match("(.*)/.*/?$") -- HOME/..
     local images = base .. "/.images/" -- HOME/../.images/

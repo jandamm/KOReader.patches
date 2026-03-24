@@ -1,32 +1,32 @@
-local DataStorage = require("datastorage")
-local SQ3 = require("lua-ljsqlite3/init")
-local datetime = require("datetime")
-local ffiUtil = require("ffi/util")
-local _ = require("gettext")
-
-local N_ = _.ngettext
-local T = ffiUtil.template
-
 local userpatch = require("userpatch")
 
 -- Inspired by https://github.com/omer-faruq/koreader-user-patches/blob/main/2-reading-stats-current-book-days-percent.lua
 -- and https://github.com/koreader/koreader/blob/6d86891d9262026cc52be756a5b19b6e580fb33d/plugins/statistics.koplugin/main.lua#L2249
 
-local function formatDayValue(user_duration_format, duration, day_pages, total_percent)
-    local value = T(
-        N_("%1 (1 page)", "%1 (%2 pages)", day_pages),
-        datetime.secondsToClockDuration(user_duration_format, duration, false),
-        day_pages
-    )
+userpatch.registerPatchPluginFunc("statistics", function(ReaderStatistics)
+    local DataStorage = require("datastorage")
+    local SQ3 = require("lua-ljsqlite3/init")
+    local datetime = require("datetime")
+    local ffiUtil = require("ffi/util")
+    local _ = require("gettext")
 
-    if total_percent and total_percent > 0 then
-        value = string.format("%s → %.2f%%", value, total_percent * 100)
+    local N_ = _.ngettext
+    local T = ffiUtil.template
+
+    local function formatDayValue(user_duration_format, duration, day_pages, total_percent)
+        local value = T(
+            N_("%1 (1 page)", "%1 (%2 pages)", day_pages),
+            datetime.secondsToClockDuration(user_duration_format, duration, false),
+            day_pages
+        )
+
+        if total_percent and total_percent > 0 then
+            value = string.format("%s → %.2f%%", value, total_percent * 100)
+        end
+
+        return value
     end
 
-    return value
-end
-
-userpatch.registerPatchPluginFunc("statistics", function(ReaderStatistics)
     function ReaderStatistics:getDatesForBook(id_book)
         local results = {}
 

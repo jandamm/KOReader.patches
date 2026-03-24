@@ -34,7 +34,9 @@ local button_to_replace = "right3"
 
 -- don't change anything below this line
 local function patchCoverBrowser(plugin)
-    local TitleBar = require("titlebar")
+    local has_pt, TitleBar  = pcall(require, "titlebar")
+    if not has_pt then return end
+
     local orig_TitleBar_init = TitleBar.init
     TitleBar.init = function(self)
         self[button_to_replace .. "_icon"] = "star.empty"

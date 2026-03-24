@@ -15,7 +15,8 @@ local max_cover_dimension = 750 -- default 600
 local userpatch = require("userpatch")
 
 local function patchCoverBrowser(plugin)
-    local BIM = require("bookinfomanager")
+    local has_pt, BIM = pcall(require,"bookinfomanager")
+    if not has_pt then return end
     BIM.max_cover_dimen = max_cover_dimension
 end
 

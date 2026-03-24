@@ -7,8 +7,10 @@ local function patchCoverBrowser(plugin)
     if patched then return end
     patched = true
 
+    local has_pt, ptutil = pcall(require, "ptutil")
+    if not has_pt then return end
+
     local util = require("util")
-    local ptutil = require("ptutil")
 
     local function fileIfExists(path)
         return util.fileExists(path) and path

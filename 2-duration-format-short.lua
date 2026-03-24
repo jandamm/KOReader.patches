@@ -1,5 +1,3 @@
-#!/usr/bin/env lua
-
 local datetime = require("datetime")
 
 --[[
