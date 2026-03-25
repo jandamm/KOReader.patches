@@ -28,9 +28,9 @@ Just be sure that some lists might look off when using `always_compact`. The lin
 01:37 Test  -> 1:37 Test
 ```
 
-## [2-confirm-first-open-in-books](2-confirm-first-open-in-books.lua)
+## [2-confirm-first-open-in-home](2-confirm-first-open-in-home.lua)
 
-Shows a dialog when a book in `HOME/.koreader/Books` is opened for the first time.
+Shows a confirmation dialog when a book in `home_dir` is opened for the first time.
 
 Derived from [2-confirm-first-open.lua](https://github.com/medinauta/Koreader-Patches/blob/main/2-confirm-first-open.lua).
 

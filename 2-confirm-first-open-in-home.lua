@@ -9,14 +9,13 @@ local DocSettings = require("docsettings")
 local logger = require("logger")
 local util = require("util")
 
-local user_path = "/mnt/onboard/.koreader/"
-
 if not FileManager._confirm_first_open_patched then
     FileManager._confirm_first_open_patched = true
     logger.dbg("[ConfirmFirstOpen] Patching FileManager.openFile")
 
-    local function isInBooks(path)
-        return util.stringStartsWith(path, user_path .. "Books/")
+    local function isInHome(path)
+        local home = G_reader_settings:readSetting("home_dir"):match("(.*)/?") .. "/"
+        return util.stringStartsWith(path, home)
     end
 
     local orig_openFile = FileManager.openFile
@@ -24,7 +23,7 @@ if not FileManager._confirm_first_open_patched then
     FileManager.openFile = function(self, path, ...)
         local args = { ... }
 
-        if not isInBooks(path) then
+        if not isInHome(path) then
             return orig_openFile(self, path, unpack(args))
         end
 
