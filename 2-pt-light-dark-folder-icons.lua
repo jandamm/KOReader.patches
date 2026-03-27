@@ -2,13 +2,10 @@
 
 local userpatch = require("userpatch")
 
-local patched = false
 local function patchCoverBrowser(plugin)
-    if patched then return end
-    patched = true
-
     local has_pt, ptutil = pcall(require, "ptutil")
-    if not has_pt then return end
+    if not has_pt or ptutil._jd_patched_folder_icons then return end
+    ptutil._jd_patched_folder_icons = true
 
     local util = require("util")
 

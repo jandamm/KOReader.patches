@@ -8,13 +8,11 @@ local percentage_decimal_places = 1
 
 local userpatch = require("userpatch")
 
-local patched = false
 local function patchCoverBrowser(plugin)
-    if patched then return end
-    patched = true
-
     local has_pt, ptutil = pcall(require, "ptutil")
-    if not has_pt then return end
+    if not has_pt or ptutil._jd_patched_progress_percentage then return end
+    ptutil._jd_patched_progress_percentage = true
+
     local orig_progress = ptutil.formatProgressText
 
     function ptutil.formatProgressText(status, bookinfo, pages, draw_progressbar, percent_finished, ...)

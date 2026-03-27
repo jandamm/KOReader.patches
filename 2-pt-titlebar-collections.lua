@@ -28,14 +28,15 @@ https://github.com/koreader/koreader/blob/master/frontend/dispatcher.lua
 -- Source: https://github.com/joshuacant/KOReader.patches/blob/main/2-toolbar-replace-button.lua
 
 local userpatch = require("userpatch")
-local Dispatcher = require("dispatcher")
-
-local button_to_replace = "right3"
 
 -- don't change anything below this line
 local function patchCoverBrowser(plugin)
     local has_pt, TitleBar  = pcall(require, "titlebar")
-    if not has_pt then return end
+    if not has_pt or TitleBar._jd_patched_collection_button then return end
+    TitleBar._jd_patched_collection_button = true
+
+    local Dispatcher = require("dispatcher")
+    local button_to_replace = "right3"
 
     local orig_TitleBar_init = TitleBar.init
     TitleBar.init = function(self)
@@ -45,4 +46,5 @@ local function patchCoverBrowser(plugin)
         orig_TitleBar_init(self)
     end
 end
+
 userpatch.registerPatchPluginFunc("coverbrowser", patchCoverBrowser)

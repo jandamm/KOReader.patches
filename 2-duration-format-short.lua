@@ -1,5 +1,8 @@
 local datetime = require("datetime")
 
+if datetime._jd_patched_time then return end
+datetime._jd_patched_time = true
+
 --[[
 This patch shows a compact date format:
 When the time interval is < 1 hour and seconds should be shown         -> 1:23

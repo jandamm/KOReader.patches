@@ -2,6 +2,9 @@ local datetime = require("datetime")
 
 local always_compact = false
 
+if datetime._jd_patched_time then return end
+datetime._jd_patched_time = true
+
 local original_secondsToClock = datetime.secondsToClockDuration
 datetime.secondsToClockDuration = function (format, seconds, withoutSeconds, withDays, compact, ...)
     local out = original_secondsToClock(format, seconds, withoutSeconds, withDays, compact, ...)

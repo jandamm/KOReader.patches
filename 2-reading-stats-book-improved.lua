@@ -4,6 +4,9 @@ local userpatch = require("userpatch")
 -- and https://github.com/koreader/koreader/blob/6d86891d9262026cc52be756a5b19b6e580fb33d/plugins/statistics.koplugin/main.lua#L2249
 
 userpatch.registerPatchPluginFunc("statistics", function(ReaderStatistics)
+    if ReaderStatistics._jd_patched_stats_improved then return end
+    ReaderStatistics._jd_patched_stats_improved = true
+
     local DataStorage = require("datastorage")
     local SQ3 = require("lua-ljsqlite3/init")
     local datetime = require("datetime")

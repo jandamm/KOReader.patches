@@ -1,9 +1,12 @@
-local DataStorage = require("datastorage")
 local util = require("util")
+
+if util._jd_patched_non_book_stats then return end
+util._jd_patched_non_book_stats = true
 
 -- https://github.com/koreader/koreader/issues/10308#issuecomment-1507743114
 -- And following comments
 
+local DataStorage = require("datastorage")
 local function isInDataDir(path)
     return util.stringStartsWith(path, DataStorage:getDataDir())
 end
