@@ -16,6 +16,13 @@ For a Kobo device this could be:
 The idea behind this is that in `/base/Books` all books are stored (this folder can be named differently).  
 In `/base` there could be the `Archive`, `Instapaper` or other books you wouldn't want to track like you own books. Maybe knowledge books or books you read to a kid or spouse.
 
+## [2-bookloadcover-improved](2-bookloadcover-improved.lua)
+
+This is an improved version of [2-bookloadcover](https://github.com/reuerendo/koreader-patches/blob/d41cc14b9bdc7bb2bcbc1c78c10277fded230176/2-bookloadcover.lua)
+
+- Cover won't be shown when the book is reloaded in the background (See https://github.com/reuerendo/koreader-patches/pull/1)
+- Cover will keep aspect ratio but will still fill the whole screen
+
 ## [2-compact-classic-time](2-compact-classic-time.lua)
 
 By default the time in classic format is `hh:mm(:ss)` no matter if `compact` is set or not.  
